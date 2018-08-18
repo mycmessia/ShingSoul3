@@ -9,7 +9,7 @@
 /**
  * 
  */
-UCLASS()
+UCLASS(config=Game)
 class SHININGSOUL3_API ASSCharacter : public ABaseCharacter
 {
 	GENERATED_BODY()
