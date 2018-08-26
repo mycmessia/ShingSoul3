@@ -29,6 +29,9 @@ public:
     /** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category=Camera)
         float BaseLookUpRate;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+        bool bIsPunching;
 	
 protected:
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -56,6 +59,10 @@ protected:
 
 	/** Handler for when a touch input stops. */
 	void TouchStopped(ETouchIndex::Type FingerIndex, FVector Location);
+
+	virtual void Punch();
+
+	virtual void StopPunching();
 
 private:
     /** Camera boom positioning the camera behind the character */

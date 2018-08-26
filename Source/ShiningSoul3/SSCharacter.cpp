@@ -52,6 +52,9 @@ void ASSCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputC
     PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
     PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
 
+    PlayerInputComponent->BindAction("Punch", IE_Pressed, this, &ASSCharacter::Punch);
+    PlayerInputComponent->BindAction("Punch", IE_Released, this, &ASSCharacter::StopPunching);
+
     PlayerInputComponent->BindAxis("MoveForward", this, &ASSCharacter::MoveForward);
     PlayerInputComponent->BindAxis("MoveRight", this, &ASSCharacter::MoveRight);
 
@@ -76,6 +79,16 @@ void ASSCharacter::TouchStarted(ETouchIndex::Type FingerIndex, FVector Location)
 void ASSCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 {
     StopJumping();
+}
+
+void ASSCharacter::Punch()
+{
+    bIsPunching = true;
+}
+
+void ASSCharacter::StopPunching()
+{
+    bIsPunching = false;
 }
 
 void ASSCharacter::TurnAtRate(float Rate)
