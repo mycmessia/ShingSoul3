@@ -12,6 +12,6 @@ We plan to make  an ARPG game similar to Shining Soul 2.
 
 ### Version 1.0
 
-1. A player has a wepon who can attack.
+1. A player has a weapon and can attack.
 
 2. AI controlled enemies which can attack the player.
