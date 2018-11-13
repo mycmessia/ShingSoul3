@@ -31,15 +31,16 @@ ASSCharacter::ASSCharacter()
     GetCharacterMovement()->AirControl = 0.2f;
 
     // Create a camera boom (pulls in towards the player if there is a collision)
-    CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
-    CameraBoom->SetupAttachment(RootComponent);
-    CameraBoom->TargetArmLength = 300.0f; // The camera follows at this distance behind the character	
-    CameraBoom->bUsePawnControlRotation = true; // Rotate the arm based on the controller
+    CameraBoomComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoomComp"));
+	CameraBoomComp->SetupAttachment(RootComponent);
+	CameraBoomComp->TargetArmLength = 300.0f; // The camera follows at this distance behind the character	
+	CameraBoomComp->bUsePawnControlRotation = true; // Rotate the arm based on the controller
 
-    // Create a follow camera
-    FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-    FollowCamera->SetupAttachment(CameraBoom,USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
-    FollowCamera->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+    FollowCameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCameraComp"));
+	FollowCameraComp->SetupAttachment(CameraBoomComp,USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
+	FollowCameraComp->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+
+	ActionStateMachineComp = CreateDefaultSubobject<UActionStateMachineComponent>(TEXT("ActionStateMachineComp"));
 
     // Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
     // are set in the derived blueprint asset named BP_SSCharacter (to avoid direct content references in C++)
@@ -47,7 +48,6 @@ ASSCharacter::ASSCharacter()
 
 void ASSCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
-    // Set up gameplay key bindings
     check(PlayerInputComponent);
     PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ACharacter::Jump);
     PlayerInputComponent->BindAction("Jump", IE_Released, this, &ACharacter::StopJumping);
@@ -83,12 +83,12 @@ void ASSCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 
 void ASSCharacter::Punch()
 {
-    bIsPunching = true;
+	ActionStateMachineComp->GetStateMachine().ChangeState(MakeUnique<FActionStatePunch>());
 }
 
 void ASSCharacter::StopPunching()
 {
-    bIsPunching = false;
+	ActionStateMachineComp->GetStateMachine().ChangeState(MakeUnique<FActionStateIdle>());
 }
 
 void ASSCharacter::TurnAtRate(float Rate)

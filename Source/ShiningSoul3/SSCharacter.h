@@ -3,7 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
+#include "Character/ActionStatePattern/ActionStates/ActionStates.h"
+#include "Character/ActionStatePattern/ActionStateMachine.h"
+#include "Character/ActionStatePattern/ActionStateMachineComponent.h"
 #include "BaseCharacter.h"
+
 #include "SSCharacter.generated.h"
 
 /**
@@ -17,10 +22,10 @@ public:
     ASSCharacter();
 
     /** Returns CameraBoom subobject **/
-    FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+    FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoomComp; }
 
     /** Returns FollowCamera subobject **/
-    FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+    FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCameraComp; }
 
     /** Base turn rate, in deg/sec. Other scaling may affect final turn rate. */
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category=Camera)
@@ -29,9 +34,6 @@ public:
     /** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
     UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category=Camera)
         float BaseLookUpRate;
-
-    UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
-        bool bIsPunching;
 	
 protected:
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
@@ -66,10 +68,13 @@ protected:
 
 private:
     /** Camera boom positioning the camera behind the character */
-    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category = Camera,meta = (AllowPrivateAccess = "true"))
-        class USpringArmComponent* CameraBoom;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+        class USpringArmComponent* CameraBoomComp;
 
     /** Follow camera */
-    UPROPERTY(VisibleAnywhere,BlueprintReadOnly,Category = Camera,meta = (AllowPrivateAccess = "true"))
-        class UCameraComponent* FollowCamera;
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+        class UCameraComponent* FollowCameraComp;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = ActionState, meta = (AllowPrivateAccess = "true"))
+		class UActionStateMachineComponent* ActionStateMachineComp;
 };
