@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 
 #include "ActionStateMachine.h"
+#include "ActionStates/ActionState.h"					// Have to include this to fix an UHT bug https://answers.unrealengine.com/questions/424938/enum-parameter-with-ufunction.html
 #include "Components/ActorComponent.h"
 
 #include "ActionStateMachineComponent.generated.h"
@@ -20,7 +21,10 @@ public:
 
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	FActionStateMachine& GetStateMachine() { return Machine; };
+	FActionStateMachine& GetStateMachine() { return Machine; }
+
+	UFUNCTION(BlueprintCallable)
+	bool IsInState(EActionState StateEnum);
 
 protected:
 	virtual void BeginPlay() override;

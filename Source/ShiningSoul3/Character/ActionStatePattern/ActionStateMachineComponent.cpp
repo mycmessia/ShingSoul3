@@ -32,3 +32,8 @@ void UActionStateMachineComponent::TickComponent(float DeltaTime, ELevelTick Tic
 	Machine.Update();
 }
 
+bool UActionStateMachineComponent::IsInState(EActionState StateEnum)
+{
+	return StateEnum == GetStateMachine().CurrentStateEnum;
+}
+

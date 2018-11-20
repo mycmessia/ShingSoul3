@@ -18,15 +18,37 @@ void FActionStateMachine::Update()
 	}
 }
 
-void FActionStateMachine::ChangeState(TUniquePtr<FActionState> NewState)
+void FActionStateMachine::ChangeState(EActionState NewStateEnum)
 {
-	if (CurrentState.IsValid())
+	if (CurrentStateEnum != NewStateEnum)
 	{
-		CurrentState->End();
+		if (CurrentState.IsValid())
+		{
+			CurrentState->End();
+		}
+
+		TSharedPtr<FActionState> NewState = CreateState(NewStateEnum);
+
+		if (NewState.IsValid())
+		{
+			NewState->Start();
+			CurrentState = NewState;
+			CurrentStateEnum = NewStateEnum;
+		}
+	}
+}
+
+TSharedPtr<FActionState> FActionStateMachine::CreateState(EActionState NewState)
+{
+	switch (NewState)
+	{
+	case EActionState::IDLE:
+		return MakeShared<FActionStateIdle>();
+	case EActionState::PUNCH:
+		return MakeShared<FActionStatePunch>();
+	default:
+		break;
 	}
 
-	if (NewState.IsValid())
-	{
-		NewState->Start();
-	}
+	return nullptr;
 }

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 
-#include "ActionStates/ActionState.h"
+#include "ActionStates/ActionStates.h"
 
 /**
  * 
@@ -16,8 +16,11 @@ public:
 	~FActionStateMachine();
 
 	TSharedPtr<FActionState> CurrentState;
+	EActionState CurrentStateEnum;
 
 	void Update();
 
-	void ChangeState(TUniquePtr<FActionState> NewState);
+	void ChangeState(EActionState NewStateEnum);
+
+	TSharedPtr<FActionState> CreateState(EActionState NewState);
 };

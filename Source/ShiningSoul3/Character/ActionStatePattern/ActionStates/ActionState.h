@@ -4,6 +4,13 @@
 
 #include "CoreMinimal.h"
 
+UENUM()
+enum class EActionState : uint8
+{
+	IDLE,
+	PUNCH
+};
+
 /**
  * 
  */
