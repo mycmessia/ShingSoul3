@@ -2,7 +2,9 @@
 
 This is a hobby project created with Unreal Engine 4.19.2.
 
-We plan to make  an ARPG game similar to Shining Soul 2.
+We plan to make  an ARPG game similar to Shining Soul 2 but in 3D.
+
+We are using free assets from Infinity Blade atm but we may make our own models in the future.
 
 ## Coding Conventions
 
