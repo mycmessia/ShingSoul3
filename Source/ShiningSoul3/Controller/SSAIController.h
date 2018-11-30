@@ -23,8 +23,9 @@ public:
 
 	void SetSeenTarget(APawn* Pawn);
 
-	UPROPERTY(EditDefaultsOnly, Category = "AI")
-		FName BlackboardKeyTarget = "Target";
+	static FName BlackboardKeyTargetName;
+	static FName BehaviourTreeCompName;
+	static FName BlackboardCompName;
 
 private:
 	UBehaviorTreeComponent* BehaviourTreeComp;

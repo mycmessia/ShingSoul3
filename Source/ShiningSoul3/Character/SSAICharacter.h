@@ -24,6 +24,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "AI")
 		class UBehaviorTree* BehaviourTree;
 
+	static FName PawnSensingCompName;
+
 private:
 	UFUNCTION()
 		void OnSeePlayer(APawn* Pawn);

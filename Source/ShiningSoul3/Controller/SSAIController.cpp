@@ -7,12 +7,15 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "Character/SSAICharacter.h"
 
+FName ASSAIController::BlackboardKeyTargetName(TEXT("Target"));
+FName ASSAIController::BehaviourTreeCompName(TEXT("BehaviourTreeComp"));
+FName ASSAIController::BlackboardCompName(TEXT("BlackboardComp"));
 
 ASSAIController::ASSAIController()
 {
 	// Not a good example cause FName constructor is expensive. Will optimize it later.
-	BehaviourTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(TEXT("BehaviourTreeComp"));
-	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(TEXT("BlackboardComp"));
+	BehaviourTreeComp = CreateDefaultSubobject<UBehaviorTreeComponent>(BehaviourTreeCompName);
+	BlackboardComp = CreateDefaultSubobject<UBlackboardComponent>(BlackboardCompName);
 }
 
 void ASSAIController::Possess(APawn* Pawn)
@@ -36,6 +39,6 @@ void ASSAIController::SetSeenTarget(APawn* Pawn)
 {
 	if (BlackboardComp)
 	{
-		BlackboardComp->SetValueAsObject(BlackboardKeyTarget, Pawn);
+		BlackboardComp->SetValueAsObject(BlackboardKeyTargetName, Pawn);
 	}
 }

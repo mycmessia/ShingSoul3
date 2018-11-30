@@ -18,6 +18,7 @@ UCLASS(config=Game)
 class SHININGSOUL3_API ASSCharacter : public ABaseCharacter
 {
 	GENERATED_BODY()
+
 public:
     ASSCharacter();
 
@@ -34,6 +35,10 @@ public:
     /** Base look up/down rate, in deg/sec. Other scaling may affect final rate. */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera)
         float BaseLookUpRate;
+
+	static FName CameraBoomCompName;
+	static FName FollowCameraCompName;
+	static FName ActionStateMachineCompName;
 	
 protected:
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;

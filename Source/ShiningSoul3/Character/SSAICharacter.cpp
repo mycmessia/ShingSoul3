@@ -7,13 +7,15 @@
 #include "Perception/PawnSensingComponent.h"
 
 
+FName ASSAICharacter::PawnSensingCompName(TEXT("PawnSensingComp"));
+
 // Sets default values
 ASSAICharacter::ASSAICharacter()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(TEXT("PawnSensingComp"));
+	PawnSensingComp = CreateDefaultSubobject<UPawnSensingComponent>(PawnSensingCompName);
 	PawnSensingComp->SetPeripheralVisionAngle(90.0f);
 }
 

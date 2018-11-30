@@ -9,6 +9,9 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 
+FName ASSCharacter::CameraBoomCompName(TEXT("CameraBoomComp"));
+FName ASSCharacter::FollowCameraCompName(TEXT("FollowCameraComp"));
+FName ASSCharacter::ActionStateMachineCompName(TEXT("ActionStateMachineComp"));
 
 ASSCharacter::ASSCharacter()
 {
@@ -25,22 +28,22 @@ ASSCharacter::ASSCharacter()
     bUseControllerRotationRoll = false;
 
     // Configure character movement
-    GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
-    GetCharacterMovement()->RotationRate = FRotator(0.0f,540.0f,0.0f); // ...at this rotation rate
+    GetCharacterMovement()->bOrientRotationToMovement = true;				// Character moves in the direction of input...	
+    GetCharacterMovement()->RotationRate = FRotator(0.0f,540.0f,0.0f);		// ...at this rotation rate
     GetCharacterMovement()->JumpZVelocity = 600.f;
     GetCharacterMovement()->AirControl = 0.2f;
 
     // Create a camera boom (pulls in towards the player if there is a collision)
-    CameraBoomComp = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoomComp"));
+    CameraBoomComp = CreateDefaultSubobject<USpringArmComponent>(CameraBoomCompName);
 	CameraBoomComp->SetupAttachment(RootComponent);
-	CameraBoomComp->TargetArmLength = 300.0f; // The camera follows at this distance behind the character	
-	CameraBoomComp->bUsePawnControlRotation = true; // Rotate the arm based on the controller
+	CameraBoomComp->TargetArmLength = 300.0f;											// The camera follows at this distance behind the character	
+	CameraBoomComp->bUsePawnControlRotation = true;										// Rotate the arm based on the controller
 
-    FollowCameraComp = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCameraComp"));
-	FollowCameraComp->SetupAttachment(CameraBoomComp,USpringArmComponent::SocketName); // Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
-	FollowCameraComp->bUsePawnControlRotation = false; // Camera does not rotate relative to arm
+    FollowCameraComp = CreateDefaultSubobject<UCameraComponent>(FollowCameraCompName);
+	FollowCameraComp->SetupAttachment(CameraBoomComp,USpringArmComponent::SocketName);	// Attach the camera to the end of the boom and let the boom adjust to match the controller orientation
+	FollowCameraComp->bUsePawnControlRotation = false;									// Camera does not rotate relative to arm
 
-	ActionStateMachineComp = CreateDefaultSubobject<UActionStateMachineComponent>(TEXT("ActionStateMachineComp"));
+	ActionStateMachineComp = CreateDefaultSubobject<UActionStateMachineComponent>(ActionStateMachineCompName);
 
     // Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
     // are set in the derived blueprint asset named BP_SSCharacter (to avoid direct content references in C++)
