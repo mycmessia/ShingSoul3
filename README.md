@@ -23,3 +23,5 @@ We are using free assets from Infinity Blade atm but we may make our own models 
 1. A player has a weapon and can attack.
 
 2. AI controlled enemies which can attack the player.
+
+3. A new module for gameplay tests.
