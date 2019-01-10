@@ -33,7 +33,7 @@ void ASSAICharacter::BeginPlay()
 void ASSAICharacter::OnSeePlayer(APawn* Pawn)
 {
 	ASSAIController* AIController = Cast<ASSAIController>(GetController());
-	//Set the seen target on the blackboard
+	// Set the seen target on the blackboard
 	if (AIController)
 	{
 		AIController->SetSeenTarget(Pawn);

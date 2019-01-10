@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "EventSystem/SSEventDispatcher.h"
+
 #include "SSAICharacter.generated.h"
 
 UCLASS()
@@ -25,6 +27,8 @@ public:
 		class UBehaviorTree* BehaviourTree;
 
 	static FName PawnSensingCompName;
+
+	FSSEventDispatcher EventDispatcher;
 
 private:
 	UFUNCTION()
