@@ -1,5 +1,3 @@
-#include "ActionStateIdle.h"
-#include "ActionStateIdle.h"
 // Copyright Yuchen Mei and Matias Lavik. All rights reserved. :)
 
 #include "ActionStateIdle.h"

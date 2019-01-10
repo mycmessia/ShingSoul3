@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Yuchen Mei and Matias Lavik. All rights reserved. :)
 
 #include "SSCharacter.h"
 
