@@ -10,7 +10,7 @@ FActionStatePunch::~FActionStatePunch()
 {
 }
 
-void FActionStatePunch::Start()
+void FActionStatePunch::Enter()
 {
 
 }
@@ -20,6 +20,6 @@ void FActionStatePunch::Update()
 
 }
 
-void FActionStatePunch::End()
+void FActionStatePunch::Exit()
 {
 }

@@ -12,7 +12,7 @@ FActionStateIdle::~FActionStateIdle()
 {
 }
 
-void FActionStateIdle::Start()
+void FActionStateIdle::Enter()
 {
 }
 
@@ -20,7 +20,7 @@ void FActionStateIdle::Update()
 {
 }
 
-void FActionStateIdle::End()
+void FActionStateIdle::Exit()
 {
 
 }

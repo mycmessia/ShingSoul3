@@ -10,7 +10,7 @@ FActionState::~FActionState()
 {
 }
 
-void FActionState::Start()
+void FActionState::Enter()
 {
 }
 
@@ -19,6 +19,6 @@ void FActionState::Update()
 
 }
 
-void FActionState::End()
+void FActionState::Exit()
 {
 }

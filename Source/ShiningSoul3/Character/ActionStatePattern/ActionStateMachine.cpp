@@ -24,14 +24,14 @@ void FActionStateMachine::ChangeState(EActionState NewStateEnum)
 	{
 		if (CurrentState.IsValid())
 		{
-			CurrentState->End();
+			CurrentState->Exit();
 		}
 
 		TSharedPtr<FActionState> NewState = CreateState(NewStateEnum);
 
 		if (NewState.IsValid())
 		{
-			NewState->Start();
+			NewState->Enter();
 			CurrentState = NewState;
 			CurrentStateEnum = NewStateEnum;
 		}
@@ -42,9 +42,9 @@ TSharedPtr<FActionState> FActionStateMachine::CreateState(EActionState NewState)
 {
 	switch (NewState)
 	{
-	case EActionState::IDLE:
+	case EActionState::Idle:
 		return MakeShared<FActionStateIdle>();
-	case EActionState::PUNCH:
+	case EActionState::Punch:
 		return MakeShared<FActionStatePunch>();
 	default:
 		break;

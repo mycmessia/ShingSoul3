@@ -86,12 +86,12 @@ void ASSCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Location)
 
 void ASSCharacter::Punch()
 {
-	ActionStateMachineComp->GetStateMachine().ChangeState(EActionState::PUNCH);
+	ActionStateMachineComp->GetStateMachine().ChangeState(EActionState::Punch);
 }
 
 void ASSCharacter::StopPunching()
 {
-	ActionStateMachineComp->GetStateMachine().ChangeState(EActionState::IDLE);
+	ActionStateMachineComp->GetStateMachine().ChangeState(EActionState::Idle);
 }
 
 void ASSCharacter::TurnAtRate(float Rate)

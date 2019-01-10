@@ -15,7 +15,7 @@ public:
 	FActionStateIdle();
 	virtual ~FActionStateIdle();
 
-	virtual void Start();
+	virtual void Enter();
 	virtual void Update();
-	virtual void End();
+	virtual void Exit();
 };

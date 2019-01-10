@@ -7,8 +7,8 @@
 UENUM()
 enum class EActionState : uint8
 {
-	IDLE,
-	PUNCH
+	Idle,
+	Punch
 };
 
 /**
@@ -20,7 +20,7 @@ public:
 	FActionState();
 	virtual ~FActionState();
 
-	virtual void Start();
+	virtual void Enter();
 	virtual void Update();
-	virtual void End();
+	virtual void Exit();
 };
